@@ -42,7 +42,7 @@ jobs:
       - name: Deploy
         env:
           CLIENT_INIT_DEPLOY_KEY: ${{ secrets.CLIENT_INIT_DEPLOY_KEY }}
-          CLIENT_2_INIT_DEPLOY_KEY: ${{ secrets.CLIENT-2_INIT_DEPLOY_KEY }}
+          CLIENT_2_INIT_DEPLOY_KEY: ${{ secrets.CLIENT_2_INIT_DEPLOY_KEY }}
         run: |
           npx nx affected \
           --target=deploy \
