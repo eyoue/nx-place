@@ -3,7 +3,7 @@ name: Install
 on:
   push:
     branches: [init]
-    paths: ['apps/client/**', 'libs/**/fe/**']
+    paths: ['apps/client*/**', 'libs/**/fe/**']
   workflow_dispatch:
 
 jobs:
