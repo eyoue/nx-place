@@ -18,6 +18,8 @@ jobs:
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
           workflow: npm-install.yml
+          name: install-artifact
+          path: install-artifact
 
       - run: ls -la
 
