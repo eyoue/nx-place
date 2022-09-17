@@ -44,6 +44,3 @@ jobs:
         run: npm install
 
       - uses: actions/upload-artifact@v3
-        with:
-          name: install-artifact
-          path: install-artifact/**/*
