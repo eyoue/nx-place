@@ -41,5 +41,5 @@ jobs:
 
       - name: Deploy
         env:
-          NX_BASE: remotes/origin/${{ github.event.push.base.ref }}
+          NX_BASE: remotes/origin/init
         run: npx nx affected --target=deploy --base=$NX_BASE
