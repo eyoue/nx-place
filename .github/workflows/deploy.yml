@@ -16,9 +16,9 @@ jobs:
         with:
           fetch-depth: 0
 
-    - uses: actions/download-artifact@v3
-      with:
-        name: install-artifact
+      - uses: actions/download-artifact@v3
+        with:
+          name: install-artifact
       - run: ls -la
 
   on-failure:
