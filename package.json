@@ -1,6 +1,6 @@
 {
   "name": "nx-place",
-  "version": "0.0.0",
+  "version": "22.9.1",
   "license": "MIT",
   "scripts": {
     "ng": "nx",
