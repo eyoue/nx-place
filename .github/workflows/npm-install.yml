@@ -2,7 +2,7 @@ name: Install
 
 on:
   push:
-    branches: [init]
+    branches: [master]
     paths: ['apps/client*/**', 'libs/**/fe/**']
   workflow_dispatch:
 
@@ -18,6 +18,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        env:
+          before-sha: ${{ github.event.before }}
+          after-sha: ${{ github.event.after }}
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v3
@@ -43,22 +46,19 @@ jobs:
         run: |
           npx nx affected \
           --target=build \
-          --base=${{ github.event.before }} \
-          --head=${{ github.event.after }} \
-
-      - name: Ls
-        run: ls
+          --base=${{ env.before-sha }} \
+          --head=${{ env.after-sha }} \
 
       - name: Affected deploy
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          CLIENT_INIT_SITE_ID: ${{ secrets.CLIENT_INIT_SITE_ID }}
-          CLIENT_2_INIT_SITE_ID: ${{ secrets.CLIENT_2_INIT_SITE_ID }}
+          CLIENT_SITE_ID: ${{ secrets.PROD_CLIENT_SITE_ID }}
+          CLIENT_2_SITE_ID: ${{ secrets.PROD_CLIENT_2_SITE_ID }}
         run: |
           npx nx affected \
           --target=deploy \
-          --base=${{ github.event.before }} \
-          --head=${{ github.event.after }} \
+          --base=${{ env.before-sha }} \
+          --head=${{ env.after-sha }} \
           --NETLIFY_AUTH_TOKEN=$NETLIFY_AUTH_TOKEN \
-          --CLIENT_INIT_SITE_ID=$CLIENT_INIT_SITE_ID \
-          --CLIENT_2_INIT_SITE_ID=$CLIENT_2_INIT_SITE_ID \
+          --CLIENT_SITE_ID=CLIENT_SITE_ID \
+          --CLIENT_2_SITE_ID=CLIENT_2_SITE_ID \
