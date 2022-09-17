@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v3
@@ -47,7 +47,7 @@ jobs:
           git config user.email github-actions@github.com
           git add .
           git commit -m "patch version [skip ci]"
-          git push origin HEAD:${{ github.event.pull_request.base.ref }}
+          git push origin HEAD:${{ github.event.after }}
 
       - name: Affected build
         env:
