@@ -39,7 +39,14 @@ jobs:
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm install
 
-      - name: Deploy
+      - name: Affected build
+        run: |
+          npx nx affected \
+          --target=build \
+          --base=${{ github.event.before }} \
+          --head=${{ github.event.after }} \
+
+      - name: Affected deploy
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           CLIENT_INIT_SITE_ID: ${{ secrets.CLIENT_INIT_SITE_ID }}
