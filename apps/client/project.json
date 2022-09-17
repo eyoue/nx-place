@@ -85,7 +85,7 @@
     "deploy": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": ["curl -X POST -d {} https://api.netlify.com/build_hooks/63260671e2cf5779fb4cb6a3"],
+        "commands": ["curl -X POST -d {} https://api.netlify.com/build_hooks/63261b0b2139ab031a8d342f"],
         "parallel": false
       }
     }
