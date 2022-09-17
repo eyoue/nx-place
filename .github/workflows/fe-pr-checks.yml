@@ -37,4 +37,9 @@ jobs:
 
       - name: Npm install
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        run: npm ci --prefer-offline --frozen-lockfile
+        run: |
+          if [ -e package-lock.json ]; then
+          npm ci
+          else
+          npm i
+          fi
