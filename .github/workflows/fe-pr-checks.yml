@@ -1,0 +1,40 @@
+name: FE checks
+
+on:
+  push:
+    branches: [init]
+    paths: ['apps/client/**', 'libs/**/fe/**']
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        env:
+          node-version: ${{ matrix.node-version }}
+
+      - name: node_modules cache
+        id: node-modules-cache
+        uses: actions/cache@v2
+        env:
+          cache-name: node-modules-npm
+          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('package-lock.json') }}
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
+
+      - name: Npm install
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci --prefer-offline --frozen-lockfile
