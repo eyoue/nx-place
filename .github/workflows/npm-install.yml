@@ -1,13 +1,9 @@
-name: Install Dependencies
+name: Install
 
 on:
   push:
     branches: [init]
-    paths: ['apps/client/**', 'libs/**/fe/**']
-
-  pull_request:
-    branches: [master]
-    paths: ['apps/client/**', 'libs/**/fe/**']
+    paths: ['apps/client*/**', 'libs/**/fe/**']
   workflow_dispatch:
 
 jobs:
@@ -42,3 +38,27 @@ jobs:
       - name: Npm install
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm install
+
+      - name: Affected build
+        run: |
+          npx nx affected \
+          --target=build \
+          --base=${{ github.event.before }} \
+          --head=${{ github.event.after }} \
+
+      - name: Ls
+        run: ls
+
+      - name: Affected deploy
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          CLIENT_INIT_SITE_ID: ${{ secrets.CLIENT_INIT_SITE_ID }}
+          CLIENT_2_INIT_SITE_ID: ${{ secrets.CLIENT_2_INIT_SITE_ID }}
+        run: |
+          npx nx affected \
+          --target=deploy \
+          --base=${{ github.event.before }} \
+          --head=${{ github.event.after }} \
+          --NETLIFY_AUTH_TOKEN=$NETLIFY_AUTH_TOKEN \
+          --CLIENT_INIT_SITE_ID=$CLIENT_INIT_SITE_ID \
+          --CLIENT_2_INIT_SITE_ID=$CLIENT_2_INIT_SITE_ID \
