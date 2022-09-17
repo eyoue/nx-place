@@ -40,6 +40,4 @@ jobs:
         run: npm install
 
       - name: Deploy
-        env:
-          NX_BASE: remotes/origin/init
-        run: npx nx affected --target=deploy --base=$NX_BASE
+        run: npx nx affected --target=deploy --base=$CI_COMMIT_BEFORE_SHA --head=$CI_COMMIT_SHA
