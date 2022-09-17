@@ -51,6 +51,8 @@ jobs:
 
       - name: Affected deploy
         env:
+          before-sha: ${{ github.event.before }}
+          after-sha: ${{ github.event.after }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           CLIENT_SITE_ID: ${{ secrets.PROD_CLIENT_SITE_ID }}
           CLIENT_2_SITE_ID: ${{ secrets.PROD_CLIENT_2_SITE_ID }}
