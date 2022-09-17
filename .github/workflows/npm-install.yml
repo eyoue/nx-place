@@ -42,6 +42,7 @@ jobs:
       - name: Deploy
         env:
           CLIENT_INIT_DEPLOY_KEY: ${{ secrets.CLIENT_INIT_DEPLOY_KEY }}
+          CLIENT_2_INIT_DEPLOY_KEY: ${{ secrets.CLIENT_INIT_DEPLOY_KEY }}
         run: |
           npx nx affected \
           --target=deploy \
@@ -49,4 +50,5 @@ jobs:
           --head=${{ github.event.after }} \
           --args="\
           --client-init-deploy-key=$CLIENT_INIT_DEPLOY_KEY\
+          --client-2-init-deploy-key=$CLIENT_2_INIT_DEPLOY_KEY\
           "

@@ -3,6 +3,8 @@
   "version": 2,
   "projects": {
     "client": "apps/client",
+    "client-2": "apps/client-2",
+    "client-2-e2e": "apps/client-2-e2e",
     "client-e2e": "apps/client-e2e"
   }
 }
