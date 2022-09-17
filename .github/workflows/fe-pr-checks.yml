@@ -37,9 +37,4 @@ jobs:
 
       - name: Npm install
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        run: |
-          if [ -e package-lock.json ]; then
-          npm ci
-          else
-          npm i
-          fi
+        run: npm install
