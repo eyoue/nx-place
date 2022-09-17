@@ -47,7 +47,7 @@ jobs:
           git config user.email github-actions@github.com
           git add .
           git commit -m "patch version [skip ci]"
-          git push origin HEAD:${{ github.event.after }}
+          git push origin HEAD:master
 
       - name: Affected build
         env:
