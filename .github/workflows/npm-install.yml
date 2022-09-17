@@ -41,13 +41,14 @@ jobs:
 
       - name: Deploy
         env:
-          CLIENT_INIT_DEPLOY_KEY: ${{ secrets.CLIENT_INIT_DEPLOY_KEY }}
-          CLIENT_2_INIT_DEPLOY_KEY: ${{ secrets.CLIENT_2_INIT_DEPLOY_KEY }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          CLIENT_INIT_SITE_ID: ${{ secrets.CLIENT_INIT_SITE_ID }}
+          CLIENT_2_INIT_SITE_ID: ${{ secrets.CLIENT_2_INIT_SITE_ID }}
         run: |
           npx nx affected \
           --target=deploy \
           --base=${{ github.event.before }} \
           --head=${{ github.event.after }} \
-          --client-init-deploy-key=$CLIENT_INIT_DEPLOY_KEY \
-          --client-2-init-deploy-key=$CLIENT_2_INIT_DEPLOY_KEY \
-          --deploy-branch=init
+          --NETLIFY_AUTH_TOKEN=$NETLIFY_AUTH_TOKEN \
+          --CLIENT_INIT_SITE_ID=$CLIENT_INIT_SITE_ID \
+          --CLIENT_2_INIT_SITE_ID=$CLIENT_2_INIT_SITE_ID
