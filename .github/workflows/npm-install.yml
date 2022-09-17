@@ -49,4 +49,5 @@ jobs:
           --base=${{ github.event.before }} \
           --head=${{ github.event.after }} \
           --client-init-deploy-key=$CLIENT_INIT_DEPLOY_KEY \
-          --client-2-init-deploy-key=$CLIENT_2_INIT_DEPLOY_KEY
+          --client-2-init-deploy-key=$CLIENT_2_INIT_DEPLOY_KEY \
+          --deploy-branch=init
