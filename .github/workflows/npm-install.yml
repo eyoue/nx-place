@@ -40,4 +40,13 @@ jobs:
         run: npm install
 
       - name: Deploy
-        run: npx nx affected --target=deploy --base=${{ github.event.before }} --head=${{ github.event.after }}
+        env:
+          client-init-deploy-key: ${{ secrets.CLIENT_INIT_DEPLOY_KEY }}
+        run: |
+          npx nx affected \
+          --target=deploy \
+          --base=${{ github.event.before }} \
+          --head=${{ github.event.after }} \
+          --args="\
+          --client-init-deploy-key=$client-init-deploy-key\
+          "
