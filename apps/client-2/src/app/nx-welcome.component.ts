@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+// @ts-ignore
+import packageJson from '../../../../package.json';
 
 /* eslint-disable */
 
@@ -432,7 +434,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
         <!--  WELCOME  -->
         <div id="welcome">
           <h1>
-            <span> Hello there, TEST-2 </span>
+            <span> Hello there, {{ version }} </span>
             Welcome client-2 👋
           </h1>
         </div>
@@ -844,6 +846,8 @@ nx affected:e2e</pre>
   encapsulation: ViewEncapsulation.None,
 })
 export class NxWelcomeComponent implements OnInit {
+  version = packageJson.version;
+
   constructor() {}
 
   ngOnInit(): void {}
