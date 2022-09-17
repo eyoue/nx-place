@@ -86,7 +86,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "commands": [
-          "netlify deploy --auth {args.NETLIFY_AUTH_TOKEN} --site {args.CLIENT_2_INIT_SITE_ID} --prod --dir /dist/apps/client-2"
+          "netlify deploy --auth {args.NETLIFY_AUTH_TOKEN} --site {args.CLIENT_2_INIT_SITE_ID} --prod --dir ./dist/apps/client-2"
         ],
         "parallel": false
       }

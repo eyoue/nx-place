@@ -46,6 +46,9 @@ jobs:
           --base=${{ github.event.before }} \
           --head=${{ github.event.after }} \
 
+      - name: Ls
+        run: ls
+
       - name: Affected deploy
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -58,4 +61,4 @@ jobs:
           --head=${{ github.event.after }} \
           --NETLIFY_AUTH_TOKEN=$NETLIFY_AUTH_TOKEN \
           --CLIENT_INIT_SITE_ID=$CLIENT_INIT_SITE_ID \
-          --CLIENT_2_INIT_SITE_ID=$CLIENT_2_INIT_SITE_ID
+          --CLIENT_2_INIT_SITE_ID=$CLIENT_2_INIT_SITE_ID \
