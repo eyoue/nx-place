@@ -40,4 +40,4 @@ jobs:
         run: npm install
 
       - name: Deploy
-        run: npx nx affected --target=deploy --base=$CI_COMMIT_BEFORE_SHA --head=$CI_COMMIT_SHA
+        run: npx nx affected --target=deploy --base=${{ github.event.before }} --head=${{ github.event.after }}
