@@ -3,11 +3,11 @@ name: Install
 on:
   push:
     branches: [init]
-    paths: ['apps/client/**', 'libs/**/fe/**']
+#     paths: ['apps/client/**', 'libs/**/fe/**']
 
-  pull_request:
-    branches: [master]
-    paths: ['apps/client/**', 'libs/**/fe/**']
+#   pull_request:
+#     branches: [master]
+#     paths: ['apps/client/**', 'libs/**/fe/**']
   workflow_dispatch:
 
 jobs:
@@ -42,8 +42,4 @@ jobs:
       - name: Npm install
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm install
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: install-artifact
-          path: ./**/*
+        run: nx affected --target=deploy
