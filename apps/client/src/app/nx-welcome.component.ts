@@ -434,7 +434,7 @@ import packageJson from '../../../../package.json';
         <!--  WELCOME  -->
         <div id="welcome">
           <h1>
-            <span> Hello there, {{ version}} </span>
+            <span> Hello there, {{ version }} </span>
             Welcome client 👋
           </h1>
         </div>
