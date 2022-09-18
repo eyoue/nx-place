@@ -41,13 +41,15 @@ jobs:
 
       - name: Patch version
         run: node ./.github/hooks/patch-version
+        env:
+          base_ref: ${{ github.event.base_ref }}
 
       - run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
           git commit -m "patch version [skip ci]"
-          git push origin HEAD:master
+          git push origin HEAD:${{ env.base_ref }}
 
       - name: Affected build
         env:
